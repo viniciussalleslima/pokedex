@@ -6,13 +6,14 @@ import { Injectable } from '@angular/core';
 })
 export class PokemonService {
 
-  public listarPokemon = [];
-  
+  public listaPokemon = [];
+
   private url = 'https://pokeapi.co/api/v2/';
+
 
   constructor(private http: HttpClient) {}
 
-  buscarTodosPokemon() {
+  buscarTodosPokemons() {
     return this.http.get(this.url);
   }
 }
