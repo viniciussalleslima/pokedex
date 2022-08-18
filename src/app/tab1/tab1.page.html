@@ -14,7 +14,7 @@
 <ion-item [color]="pokemon.types[0].type.name" *ngFor="let pokemon of listaPokemon">
   <ion-thumbnail slot="start">
     <img
-      src="https://th.bing.com/th/id/R.128d3c8bca7a2356bb989305f14cd5ea?rik=YfRBDU%2f3gcbLBg&riu=http%3a%2f%2forig02.deviantart.net%2f37b5%2ff%2f2013%2f125%2f1%2ff%2f_001_bulbasaur_by_nasakii-d6463d5.gif&ehk=LkGiL%2fiot4sYiSZzgFjAUkhCj2HbjYgZFwMFtbUWXAQ%3d&risl=&pid=ImgRaw&r=0"
+      [src]="'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'+pokemon.id.toString().padStart(3, '0') +'.png'"
     />
   </ion-thumbnail>
 
@@ -22,7 +22,7 @@
     <ion-label>{{ pokemon.name | uppercase }}</ion-label>
 
     <ion-label>#{{pokemon.id}} </ion-label>
-    <ion-badge *ngFor="let type of pokemon.type " [color]="type.type.name">{{type.type.name}}</ion-badge>
+    <ion-badge *ngFor="let type of pokemon.types " [color]="type.type.name">{{type.type.name}}</ion-badge>
   </div>
 </ion-item>
 </ion-content>
