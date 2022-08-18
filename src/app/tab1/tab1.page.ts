@@ -1,19 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
 
-
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  styleUrls: ['tab1.page.scss'],
 })
-export class Tab1Page implements OnInit{
+export class Tab1Page implements OnInit {
+  public listaPokemon = [];
 
-  constructor(public pokemonService:PokemonService) {}
+  total = '';
+  next = '';
+  previous = '';
+  constructor(public pokemonService: PokemonService) {}
 
-  ngOnInit(){
-    this.pokemonService.buscarTodosPokemons().subscribe(dados => {console.log(dados)})
+  ngOnInit() {
+   this.buscarPokemon();
   }
 
-
+ async buscarPokemon() {
+    this.pokemonService.buscarTodosPokemons().subscribe((dados) => {
+      this.total = dados['count'];
+      this.next = dados['next'];
+      this.previous = dados['previous'];
+     // this.listaPokemon = dados['results'];
+      console.log(this.listaPokemon);
+   
+      for(let pokemon of dados ['results']){
+     this.pokemonService.buscarUmPokemon(pokemon.url)
+      .subscribe((dadosPokemon) => {this.listaPokemon.push(dadosPokemon);
+      })
+      }
+   
+    });
+  }
 }
